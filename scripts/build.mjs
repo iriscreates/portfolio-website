@@ -4,7 +4,9 @@ const { runPrerender } = await import('vinext/internal/build/run-prerender');
 // Let Node finish naturally instead of the CLI's forced exit on Windows.
 await (await createBuilder()).buildApp();
 await runPrerender({root:process.cwd()});
-const { readFile, access } = await import('node:fs/promises');
+const { readFile, access, copyFile, mkdir } = await import('node:fs/promises');
+await mkdir('dist/client/onedeck', { recursive: true });
+await copyFile('dist/client/onedeck.html', 'dist/client/onedeck/index.html');
 for (const [path,text] of [['index.html','Iris Yu'],['onedeck/index.html','Design goals']]) {
  const html=await readFile('dist/client/'+path,'utf8');
  if(!html.includes(text)||html.includes('Internal Server Error'))throw new Error('Static export failed: '+path);
