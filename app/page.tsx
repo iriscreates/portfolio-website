@@ -250,6 +250,20 @@ function CampaignVideoCard({
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    if (isOpen || typeof document === 'undefined') return;
+
+    document.querySelectorAll<HTMLVideoElement>(`#${detailsId} video`).forEach((video) => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  }, [detailsId, isOpen]);
+
+  const toggleInformation = () => {
+    if (!isOpen) videoRef.current?.pause();
+    setIsOpen((open) => !open);
+  };
+
   const informationLayer = (
     <div
       id={detailsId}
@@ -381,7 +395,7 @@ function CampaignVideoCard({
             type="button"
             aria-expanded={isOpen}
             aria-controls={detailsId}
-            onClick={() => setIsOpen((open) => !open)}
+            onClick={toggleInformation}
           >
             {isOpen ? 'Hide information' : 'More information'} <span aria-hidden="true">{isOpen ? '↑' : '↗'}</span>
           </button>
