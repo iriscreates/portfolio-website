@@ -146,7 +146,7 @@ export function AboutHobbies() {
                 {category.images.length > 0 ? (
                   <span className="about-hobby-card-fan">
                     {category.images.slice(0, 3).map((image) => (
-                      <img key={image.src} src={image.src} alt="" />
+                      <img key={image.src} src={image.src} alt="" loading="eager" decoding="async" />
                     ))}
                   </span>
                 ) : (

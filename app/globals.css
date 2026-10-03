@@ -130,7 +130,7 @@ html:has(.landing)::view-transition-new(root) {
 .campaign-info-toggle { grid-column: 2; grid-row: 1 / span 2; align-self: center; border: 0; border-bottom: 1px solid currentColor; padding: 0 0 2px; background: transparent; color: #76584a; cursor: pointer; font: inherit; font-size: .6875rem; white-space: nowrap; }
 .campaign-info-toggle:hover { color: #a34f2f; }
 .campaign-info-toggle:focus-visible { outline: 2px solid #a34f2f; outline-offset: 4px; }
-.campaign-information { position: fixed; inset: 0; z-index: 30; display: flex; align-items: stretch; justify-content: center; padding: clamp(16px, 5vw, 72px); overflow-x: hidden; overflow-y: auto; background: rgb(255 250 245 / 92%); backdrop-filter: blur(18px) saturate(.72); -webkit-backdrop-filter: blur(18px) saturate(.72); color: #5b3327; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 480ms ease, visibility 0s linear 480ms; }
+.campaign-information { position: fixed; inset: 0; z-index: 30; display: flex; align-items: stretch; justify-content: center; padding: clamp(16px, 5vw, 72px); overflow-x: hidden; overflow-y: auto; background: rgb(255 250 245 / 98%); backdrop-filter: blur(18px) saturate(.72); -webkit-backdrop-filter: blur(18px) saturate(.72); color: #4a2920; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 480ms ease, visibility 0s linear 480ms; }
 .campaign-information-open { opacity: 1; visibility: visible; pointer-events: auto; transition: opacity 480ms ease; }
 .campaign-information-module { width: min(100%, 1180px); padding: 24px 0 32px; background: transparent; }
 .campaign-information-header { width: 100%; margin: 0 auto; padding-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 24px; border-bottom: 1px solid #ead8cc; }
@@ -171,7 +171,7 @@ html:has(.landing)::view-transition-new(root) {
 .campaign-information-open .campaign-information-body { opacity: 1; transform: translateX(0); }
 .campaign-information-body h2 { color: #452219; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.5rem, 5vw, 4.75rem); font-weight: 400; letter-spacing: -.055em; line-height: .98; }
 .campaign-information-placeholder { max-width: 520px; margin-top: 28px; color: #704531; font-size: 1.125rem; }
-.campaign-information-body ul { max-width: 520px; margin: 34px 0 0; padding-left: 22px; list-style: disc; color: #5b3327; font-size: 1rem; line-height: 1.6; }
+.campaign-information-body ul { max-width: 520px; margin: 34px 0 0; padding-left: 22px; list-style: disc; color: #45291f; font-size: 1rem; line-height: 1.6; }
 .campaign-information-body--bullets-only ul { margin-top: 28px; font-size: .9375rem; line-height: 1.5; }
 .campaign-information-body--bullets-only li + li { margin-top: 11px; }
 .landing--strategist .work-grid--strategist .project-card img { object-fit: contain; }

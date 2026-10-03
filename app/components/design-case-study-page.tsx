@@ -18,7 +18,7 @@ export type DesignCaseStudyData = {
     image?: string;
     imageAlt?: string;
     gallery?: { src: string; alt: string }[];
-    videoGallery?: { src: string; title: string; date?: string; description?: string; bullets?: string[]; tools?: string[] }[];
+    videoGallery?: { src: string; poster?: string; title: string; date?: string; description?: string; bullets?: string[]; tools?: string[] }[];
     comparison?: {
       intro: ReactNode;
       rows: {
@@ -150,7 +150,7 @@ export function DesignCaseStudyPage({ caseStudy }: { caseStudy: DesignCaseStudyD
                 {caseStudy.solution.videoGallery.map((video, index) => (
                   <article className="solution-video-card" key={video.src}>
                     <div className="solution-video-frame">
-                      <video controls playsInline preload="metadata" width="1280" height="720" aria-label={`${video.title} video`}>
+                      <video poster={video.poster} controls playsInline preload="metadata" width="1280" height="720" aria-label={`${video.title} video`}>
                         <source src={video.src} type="video/mp4" />
                         Your browser does not support embedded video.
                       </video>
