@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-labelledby="title description">
+  <title id="title">Personal projects</title>
+  <desc id="description">Long-form motion and narrative projects from school and side projects.</desc>
+  <rect width="1200" height="720" fill="#eee8f5"/>
+  <circle cx="920" cy="120" r="230" fill="#dfd4f8" opacity=".72"/>
+  <circle cx="1030" cy="570" r="280" fill="#f6d2bc" opacity=".72"/>
+  <path d="M0 560C240 420 360 700 610 560s360-90 590 50v110H0Z" fill="#ded4ea" opacity=".78"/>
+  <text x="72" y="318" fill="#392d4c" font-family="Georgia, Times New Roman, serif" font-size="82" letter-spacing="-3">Personal projects</text>
+  <text x="78" y="386" fill="#765d84" font-family="Arial, sans-serif" font-size="28" letter-spacing="2">LONG-FORM MOTION &amp; NARRATIVE</text>
+</svg>

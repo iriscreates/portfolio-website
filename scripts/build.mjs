@@ -5,13 +5,15 @@ const { runPrerender } = await import('vinext/internal/build/run-prerender');
 await (await createBuilder()).buildApp();
 await runPrerender({root:process.cwd()});
 const { readFile, access, copyFile, mkdir } = await import('node:fs/promises');
-await mkdir('dist/client/onedeck', { recursive: true });
-await copyFile('dist/client/onedeck.html', 'dist/client/onedeck/index.html');
-for (const [path,text] of [['index.html','Iris Yu'],['onedeck/index.html','Design goals']]) {
+for (const route of ['about', 'onedeck', 'shingrix', 'personal-projects']) {
+ await mkdir(`dist/client/${route}`, { recursive: true });
+ await copyFile(`dist/client/${route}.html`, `dist/client/${route}/index.html`);
+}
+for (const [path,text] of [['index.html','Iris Yu'],['about/index.html','About me'],['onedeck/index.html','Design goals'],['shingrix/index.html','SHINGRIX'],['personal-projects/index.html','Personal projects']]) {
  const html=await readFile('dist/client/'+path,'utf8');
  if(!html.includes(text)||html.includes('Internal Server Error'))throw new Error('Static export failed: '+path);
  for(const match of html.matchAll(/(?:src|href)="(\/[^"?#]+)[^"]*"/g)){const asset=match[1];if(asset.endsWith('/'))continue;await access('dist/client'+asset);}
 }
 await access('dist/client/.nojekyll');
 if((await readFile('dist/client/CNAME','utf8')).trim()!=='irisyu.design')throw new Error('Invalid domain');
-console.log('Both portfolio pages and local assets verified in dist/client.');
+console.log('Portfolio pages and local assets verified in dist/client.');
