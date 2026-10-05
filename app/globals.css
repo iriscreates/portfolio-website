@@ -187,9 +187,9 @@ html:has(.landing)::view-transition-new(root) {
 .highlight-marks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 0; }
 .highlight-mark { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 3px; color: #5e514b; font-size: .6875rem; line-height: 1.15; }
 .highlight-mark > span:last-child { overflow-wrap: normal; font-size: .625rem; line-height: 1.1; white-space: nowrap; }
-.highlight-mark-icon { flex: 0 0 25px; width: 25px; height: 25px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #d8c4b8; border-radius: 50%; background: #fffaf5; color: #764c3c; font-size: .625rem; font-weight: 700; letter-spacing: -.03em; }
+.highlight-mark-icon { flex: 0 0 32px; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #d8c4b8; border-radius: 50%; background: #fffaf5; color: #764c3c; font-size: .7rem; font-weight: 700; letter-spacing: -.03em; }
 .highlight-mark-icon-image { border-radius: 7px; background: #fffaf5 !important; }
-.highlight-mark-icon-image img { display: block; width: 19px; height: 19px; object-fit: contain; }
+.highlight-mark-icon-image img { display: block; width: 25px; height: 25px; object-fit: contain; }
 .highlight-brands { background: #fff; }
 .highlight-brands .highlight-mark-icon { border-radius: 7px; }
 .highlight-platforms { background: #fdf6f0; }
@@ -236,6 +236,9 @@ html:has(.landing)::view-transition-new(root) {
 .landing--strategist .work-grid--strategist .campaign-caption { position: absolute; inset: 0; z-index: 2; display: block !important; padding: 12px; pointer-events: none; }
 .landing--strategist .work-grid--strategist .campaign-caption > span { display: none; }
 .landing--strategist .work-grid--strategist .campaign-info-toggle { position: absolute; top: 12px; right: 12px; border-color: rgb(255 255 255 / 78%); color: #fff; text-shadow: 0 1px 3px rgb(0 0 0 / 45%); pointer-events: auto; }
+.landing--strategist .work-grid--strategist .campaign-thumbnail-button { display: block; width: 100%; aspect-ratio: 1 / 1; padding: 0; border: 0; background: transparent; cursor: pointer; font: inherit; }
+.landing--strategist .work-grid--strategist .campaign-thumbnail-button:focus-visible { outline: 2px solid #6039a2; outline-offset: -4px; }
+.landing--strategist .work-grid--strategist .campaign-thumbnail-image { display: block; width: 100%; height: 100%; aspect-ratio: 1 / 1; object-fit: cover; }
 
 .campaign-static-card-visual { position: relative; width: 100%; aspect-ratio: 1 / 1; overflow: hidden; isolation: isolate; background: #4d5f42; }
 .campaign-static-visual-button { position: relative; z-index: 1; display: block; width: 100%; height: 100%; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; font: inherit; text-align: inherit; }
@@ -438,7 +441,7 @@ html:has(.landing)::view-transition-new(root) {
 .about-hobby-card { position: relative; display: flex; min-width: 0; flex-direction: column; border: 0; padding: 0; background: transparent; color: #39334a; cursor: pointer; font: inherit; text-align: left; transition: transform 220ms ease; }
 .about-hobby-card:hover { transform: translateY(-3px); }
 .about-hobby-card:focus-visible { outline: 2px solid #66558a; outline-offset: 4px; }
-.about-hobby-card-visual { position: relative; display: grid; height: 170px; min-height: 170px; place-items: center; overflow: visible; background: linear-gradient(145deg, #eee8fb, #f5f5f7); color: #7a708e; font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; transition: height 260ms ease; }
+.about-hobby-card-visual { position: relative; display: grid; height: 170px; min-height: 170px; place-items: center; overflow: visible; background: linear-gradient(145deg, #eee8fb, #f5f5f7); color: #5d5868; font-size: .6875rem; letter-spacing: .08em; text-transform: uppercase; transition: height 260ms ease; }
 .about-hobby-card-visual::before { content: ''; position: absolute; inset: 0; z-index: 1; background: rgb(47 43 58 / 50%); opacity: 0; transition: opacity 220ms ease; }
 .about-hobby-card-visual::after { content: 'Open gallery'; position: absolute; right: 0; bottom: 14px; left: 0; z-index: 4; border-bottom: 0; padding-bottom: 0; color: #fff; font-size: clamp(.85rem, 1.8vw, 1.1rem); font-weight: 500; letter-spacing: .02em; text-align: center; text-transform: none; opacity: 0; transform: translateY(6px); transition: opacity 220ms ease, transform 220ms ease; white-space: nowrap; }
 .about-hobby-card:hover .about-hobby-card-visual::before,
@@ -460,11 +463,21 @@ html:has(.landing)::view-transition-new(root) {
 .about-hobby-card:hover .about-hobby-card-fan img:nth-child(3),
 .about-hobby-card:focus-visible .about-hobby-card-fan img:nth-child(3) { opacity: 1; transform: translate(-7%, -50%) rotate(20deg); }
 @media (hover: none), (max-width: 700px) {
-  .about-hobby-card:hover { transform: none; }
+  .about-hobby-card,
+  .about-hobby-card:hover,
+  .about-hobby-card:focus-visible { transform: none; }
   .about-hobby-card-visual,
-  .about-hobby-card-fan { height: 216px; }
-  .about-hobby-card-fan img:nth-child(2) { opacity: 1; transform: translate(-93%, -50%) rotate(-22deg); }
-  .about-hobby-card-fan img:nth-child(3) { opacity: 1; transform: translate(-7%, -50%) rotate(20deg); }
+  .about-hobby-card-fan,
+  .about-hobby-card:hover .about-hobby-card-visual,
+  .about-hobby-card:focus-visible .about-hobby-card-visual { height: 216px; }
+  .about-hobby-card-visual::before,
+  .about-hobby-card-visual::after,
+  .about-hobby-card:hover .about-hobby-card-visual::before,
+  .about-hobby-card:focus-visible .about-hobby-card-visual::before,
+  .about-hobby-card:hover .about-hobby-card-visual::after,
+  .about-hobby-card:focus-visible .about-hobby-card-visual::after { opacity: 0; transform: none; }
+  .about-hobby-card-fan img:nth-child(n + 2) { display: none; }
+  .about-hobby-card-fan img:first-child { opacity: 1; transform: translate(-50%, -50%); }
 }
 .about-hobby-card:nth-child(2) .about-hobby-card-visual { background: linear-gradient(145deg, #f5f5f7, #e6e4eb); }
 .about-hobby-card:nth-child(3) .about-hobby-card-visual { background: linear-gradient(145deg, #f4eefb, #eee8fb); }
@@ -491,7 +504,7 @@ html:has(.landing)::view-transition-new(root) {
 .about-hobby-carousel-arrow-next { right: 14px; }
 .about-hobby-carousel-caption { max-width: 680px; margin: 16px auto 0; color: #5d5868; font-size: .9rem; line-height: 1.5; }
 .about-hobby-carousel-index { display: block; margin-top: 8px; color: #66558a; font-size: .75rem; }
-.about-hobby-dialog-placeholder { display: grid; min-height: 300px; place-items: center; align-content: center; gap: 10px; padding: 32px; background: #f3f1f8; color: #7a708e; text-align: center; }
+.about-hobby-dialog-placeholder { display: grid; min-height: 300px; place-items: center; align-content: center; gap: 10px; padding: 32px; background: #f3f1f8; color: #5d5868; text-align: center; }
 .about-hobby-dialog-placeholder span { color: #66558a; font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
 .about-hobby-dialog-placeholder p { color: #5d5868; font-size: .875rem; }
 .about-experience-card { max-width: 740px; background: #f3f1f8; padding: clamp(26px, 4vw, 48px); }

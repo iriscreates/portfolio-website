@@ -191,6 +191,7 @@ function CampaignVideoCard({
   description = 'Details placeholder — add the story, role, and results for this campaign here.',
   kindLabel = 'Social video',
   staticVisual,
+  thumbnailImage,
   informationVisual,
   informationVideos,
   informationAspect = 'vertical',
@@ -207,6 +208,7 @@ function CampaignVideoCard({
   description?: string;
   kindLabel?: string;
   staticVisual?: ReactNode;
+  thumbnailImage?: { src: string; alt: string; width: number; height: number };
   informationVisual?: ReactNode;
   informationVideos?: { src: string; poster?: string; title: string; date?: string; bullets?: string[]; tools?: string[] }[];
   informationAspect?: 'vertical' | 'horizontal';
@@ -355,7 +357,22 @@ function CampaignVideoCard({
   return (
     <>
       <figure className="campaign-video-card">
-        {src ? (
+        {thumbnailImage ? (
+          <button
+            className="campaign-thumbnail-button"
+            type="button"
+            onClick={() => setIsOpen(true)}
+            aria-label={`Open ${name} case study`}
+          >
+            <img
+              className="campaign-thumbnail-image"
+              src={thumbnailImage.src}
+              alt={thumbnailImage.alt}
+              width={thumbnailImage.width}
+              height={thumbnailImage.height}
+            />
+          </button>
+        ) : src ? (
           <video
             ref={videoRef}
             poster={poster}
@@ -462,6 +479,7 @@ export default function Home() {
                   name="Hellmann's"
                   src="/videos/hellmanns.mp4"
                   poster="/video-posters/hellmanns.jpg"
+                  thumbnailImage={{ src: '/campaign-thumbnails/hellmann.jpg', alt: "Hellmann's logo", width: 900, height: 900 }}
                   initialTime={1}
                   description=""
                   details={[
@@ -477,6 +495,7 @@ export default function Home() {
                   name="Marshalls"
                   src="/videos/marshalls-ad.mp4"
                   poster="/video-posters/marshalls-ad.jpg"
+                  thumbnailImage={{ src: '/campaign-thumbnails/marshallslogo.png', alt: 'Marshalls logo', width: 447, height: 447 }}
                   description=""
                   details={[
                     'Focus: short-form paid-ad video editing for Marshalls Canada.',
@@ -584,6 +603,7 @@ export default function Home() {
                 name="HomeSense"
                 src="/videos/homesense.mp4"
                 poster="/video-posters/homesense.jpg"
+                thumbnailImage={{ src: '/campaign-thumbnails/homesenselol.png', alt: 'HomeSense logo', width: 700, height: 700 }}
                 kindLabel="Quick-turnaround social video"
                 description=""
                 details={[
