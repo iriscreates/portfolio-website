@@ -301,7 +301,7 @@ function CampaignVideoCard({
                 controls
                 autoPlay={false}
                 playsInline
-                preload="auto"
+                preload={isOpen ? 'metadata' : 'none'}
                 onLoadedData={(event) => {
                   event.currentTarget.currentTime = initialTime;
                   event.currentTarget.pause();
@@ -379,7 +379,7 @@ function CampaignVideoCard({
             controls
             autoPlay={false}
             playsInline
-            preload="auto"
+            preload="metadata"
             onLoadedData={(event) => {
               event.currentTarget.currentTime = initialTime;
               event.currentTarget.pause();

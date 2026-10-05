@@ -7,7 +7,8 @@ export function AboutReveal({ children, className = '' }: { children: ReactNode;
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const prefersReducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    if (prefersReducedMotion || typeof IntersectionObserver === 'undefined') {
       setIsVisible(true);
       return;
     }

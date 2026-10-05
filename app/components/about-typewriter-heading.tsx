@@ -9,7 +9,7 @@ export function AboutTypewriterHeading({ text, id }: { text: string; id: string 
   const [isComplete, setIsComplete] = useState(false);
 
   useEffect(() => {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
     if (reducedMotion) {
       setVisibleText(text);
       setIsComplete(true);
