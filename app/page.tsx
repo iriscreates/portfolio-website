@@ -219,16 +219,11 @@ function CampaignVideoCard({
   informationVisualClassName?: string;
 }) {
   const [isOpen, setIsOpen] = useState(false);
-  const [isPortalReady, setIsPortalReady] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const detailVideoRef = useRef<HTMLVideoElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const detailsId = `campaign-details-${name.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
   const titleId = `${detailsId}-title`;
-
-  useEffect(() => {
-    setIsPortalReady(true);
-  }, []);
 
   useEffect(() => {
     [videoRef.current, detailVideoRef.current].forEach((video) => {
@@ -422,7 +417,7 @@ function CampaignVideoCard({
           </button>
         </figcaption>
       </figure>
-      {isPortalReady && createPortal(informationLayer, document.body)}
+      {isOpen && createPortal(informationLayer, document.body)}
     </>
   );
 }
