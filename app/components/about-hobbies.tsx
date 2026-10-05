@@ -145,8 +145,14 @@ export function AboutHobbies() {
             <span className="about-hobby-card-visual" aria-hidden="true">
                 {category.images.length > 0 ? (
                   <span className="about-hobby-card-fan">
-                    {category.images.slice(0, 3).map((image) => (
-                      <img key={image.src} src={image.src} alt="" loading="eager" decoding="async" />
+                    {category.images.slice(0, 3).map((image, index) => (
+                      <img
+                        key={image.src}
+                        src={image.src}
+                        alt=""
+                        loading={index === 0 ? 'eager' : 'lazy'}
+                        decoding={index === 0 ? 'sync' : 'async'}
+                      />
                     ))}
                   </span>
                 ) : (
@@ -184,7 +190,12 @@ export function AboutHobbies() {
             {activeCategory.images.length > 0 ? (
               <div className="about-hobby-carousel">
                 <div className="about-hobby-carousel-frame">
-                  <img src={activeCategory.images[activeIndex].src} alt={activeCategory.images[activeIndex].alt} />
+                  <img
+                    src={activeCategory.images[activeIndex].src}
+                    alt={activeCategory.images[activeIndex].alt}
+                    loading="eager"
+                    decoding="sync"
+                  />
                   <button className="about-hobby-carousel-arrow about-hobby-carousel-arrow-prev" type="button" onClick={() => moveCarousel(-1)} aria-label="Previous image"><span aria-hidden="true">←</span></button>
                   <button className="about-hobby-carousel-arrow about-hobby-carousel-arrow-next" type="button" onClick={() => moveCarousel(1)} aria-label="Next image"><span aria-hidden="true">→</span></button>
                 </div>

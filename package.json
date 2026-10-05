@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "vinext dev",
     "build": "node scripts/build.mjs",
-    "start": "vite preview --outDir dist/client",
+    "start": "node scripts/serve-static.mjs",
     "lint": "oxlint",
     "format": "oxfmt"
   },
