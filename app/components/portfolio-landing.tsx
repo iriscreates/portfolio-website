@@ -33,11 +33,11 @@ function AudienceSwitch({ audience, onChange }: { audience: Audience; onChange: 
         type="button"
         role="switch"
         aria-checked={isStrategist}
-        aria-label={`Switch to ${isStrategist ? 'designer' : 'marketing strategist'} view`}
+        aria-label={`Switch to ${isStrategist ? 'design' : 'social and content'} view`}
         onClick={() => onChange(isStrategist ? 'designer' : 'strategist')}
       >
         <span className="audience-switch-track" aria-hidden="true">
-          <span className="audience-option audience-option-designer">Designer</span>
+          <span className="audience-option audience-option-designer">Design</span>
           <span className="audience-option audience-option-strategist">Social &amp; content</span>
           <span className="audience-switch-thumb" />
         </span>
