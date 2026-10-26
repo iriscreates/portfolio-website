@@ -1,7 +1,6 @@
 'use client';
 
 import { createPortal } from 'react-dom';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { AboutReveal } from './about-reveal';
@@ -550,12 +549,12 @@ export function PortfolioLanding({ initialAudience }: { initialAudience: Audienc
               </a>
             )}
             {audience === 'designer' && (
-              <Link className="project-card" href="/rishtey/">
+              <a className="project-card" href="/rishtey/">
                 <figure>
                   <img src="/rishtey-concept.svg" alt="Rishtey concept showing a shared family calendar and a simple contact flow" width="1200" height="620" />
                   <figcaption><span>Rishtey</span></figcaption>
                 </figure>
-              </Link>
+              </a>
             )}
             {audience === 'strategist' && (
               <CampaignVideoCard
@@ -586,7 +585,7 @@ export function PortfolioLanding({ initialAudience }: { initialAudience: Audienc
               />
             )}
             {audience === 'designer' ? (
-              <Link className="project-card" href="/flux/">
+              <a className="project-card" href="/flux/">
                 <figure>
                   <img
                     src="/project-2.png"
@@ -598,7 +597,7 @@ export function PortfolioLanding({ initialAudience }: { initialAudience: Audienc
                     <span>FLUX</span>
                   </figcaption>
                 </figure>
-              </Link>
+              </a>
             ) : (
               <CampaignVideoCard
                 name="HomeSense"

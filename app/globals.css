@@ -893,3 +893,22 @@ html:has(.landing)::view-transition-new(root) {
   .solution-insights { grid-template-columns: 1fr; gap: 12px; }
 }
 @media (hover: none) { .flux-process-image-trigger span { opacity: 1; } }
+
+/* The empty desktop gutters act like the dismiss area on campaign detail overlays. */
+.case-study-side-dismiss {
+  position: fixed;
+  z-index: 1;
+  inset: 100px 0 0;
+  display: grid;
+  grid-template-columns: minmax(24px, 1fr) minmax(0, 820px) minmax(24px, 1fr);
+  pointer-events: none;
+}
+.case-study-side-dismiss a {
+  display: block;
+  min-width: 0;
+  pointer-events: auto;
+  cursor: pointer;
+  text-decoration: none;
+}
+.case-study-side-dismiss a:focus-visible { outline: 2px solid #d2b5fa; outline-offset: -8px; }
+@media (max-width: 868px) { .case-study-side-dismiss { display: none; } }

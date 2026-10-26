@@ -72,6 +72,12 @@ export function DesignCaseStudyPage({ caseStudy }: { caseStudy: DesignCaseStudyD
         </nav>
       </header>
 
+      <nav className="case-study-side-dismiss" aria-label="Close case study">
+        <a href="/" aria-label={`Close ${caseStudy.title} case study and return to all work`} />
+        <span aria-hidden="true" />
+        <a href="/" aria-label={`Close ${caseStudy.title} case study and return to all work`} />
+      </nav>
+
       <main id="main" className="case-study">
         <header id="top" className="project-heading">
           <a className="back-home" href="/">← All work</a>
