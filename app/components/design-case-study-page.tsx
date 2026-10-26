@@ -1,36 +1,56 @@
 import type { ReactNode } from 'react';
+import { AutoplayMutedVideo } from './autoplay-muted-video';
+import { SolutionImageCarousel } from './solution-image-carousel';
+import { ShingrixFlowVideo } from './shingrix-flow-video';
+
+type CaseStudyVideo = {
+  src: string;
+  poster?: string;
+  title: string;
+  date?: string;
+  description?: string;
+  bullets?: string[];
+  tools?: string[];
+};
 
 export type DesignCaseStudyData = {
   title: string;
   description: string;
-  heroImage: string;
-  heroAlt: string;
+  heroImage?: string;
+  heroAlt?: string;
   heroBackground?: string;
+  heroFit?: 'cover' | 'contain';
+  prototypeUrl?: string;
   category: string;
   role: string;
   deliverables: string;
   footerLabel?: string;
-  overview: ReactNode;
-  problem: ReactNode;
-  designGoalsIntro: ReactNode;
-  goals: [string, string, string, string];
+  overview?: ReactNode;
+  problem?: ReactNode;
+  goals?: string[];
+  videoGalleryLabel?: string;
+  videoGalleryShowIndex?: boolean;
+  videoGallery?: CaseStudyVideo[];
   solution?: {
     image?: string;
     imageAlt?: string;
     gallery?: { src: string; alt: string }[];
-    videoGallery?: { src: string; poster?: string; title: string; date?: string; description?: string; bullets?: string[]; tools?: string[] }[];
     comparison?: {
+      layout?: 'walkthrough';
+      hideTaskIndex?: boolean;
       intro: ReactNode;
       rows: {
         title: string;
         description: string;
-        original: { src: string; alt: string };
-        redesign: { src: string; alt: string };
+        hideContext?: boolean;
+        original: { src: string; alt: string; videoSrc?: string; bullets?: string[] };
+        redesign: { src: string; alt: string; flowVideoSrc?: string; bullets?: string[] };
       }[];
       supportingImages?: { src: string; alt: string }[];
     };
     copy: ReactNode;
-    insights: string[];
+    insightsTitle?: string;
+    insights?: string[];
   };
 };
 
@@ -42,7 +62,7 @@ export function DesignCaseStudyPage({ caseStudy }: { caseStudy: DesignCaseStudyD
   const solutionId = `${slug}-solution`;
 
   return (
-    <>
+    <div className="design-theme">
       <a className="skip-link" href="#main">Skip to content</a>
       <header className="site-header">
         <a className="wordmark" href="/" aria-label="Iris Yu home">Iris Yu</a>
@@ -57,38 +77,50 @@ export function DesignCaseStudyPage({ caseStudy }: { caseStudy: DesignCaseStudyD
           <a className="back-home" href="/">← All work</a>
           <h1>{caseStudy.title}</h1>
           <p>{caseStudy.description}</p>
+          {caseStudy.prototypeUrl && (
+            <a className="case-study-prototype-link" href={caseStudy.prototypeUrl} target="_blank" rel="noreferrer">
+              Open interactive prototype ↗
+            </a>
+          )}
         </header>
 
-        <figure className="project-image">
-          {caseStudy.heroBackground && (
-            <img className="image-background" src={caseStudy.heroBackground} alt="" aria-hidden="true" />
-          )}
-          <img className={caseStudy.heroBackground ? 'dashboard' : 'case-study-hero'} src={caseStudy.heroImage} alt={caseStudy.heroAlt} width="1200" height="620" fetchPriority="high" />
-        </figure>
+        {caseStudy.heroImage && (
+          <figure className={`project-image${caseStudy.heroFit === 'contain' ? ' project-image--contain' : ''}`}>
+            {caseStudy.heroBackground && (
+              <img className="image-background" src={caseStudy.heroBackground} alt="" aria-hidden="true" />
+            )}
+            <img className={caseStudy.heroBackground ? 'dashboard' : `case-study-hero${caseStudy.heroFit === 'contain' ? ' case-study-hero--contain' : ''}`} src={caseStudy.heroImage} alt={caseStudy.heroAlt ?? ''} width="1200" height="620" fetchPriority="high" />
+          </figure>
+        )}
 
-        <dl className="project-details">
+        <dl className={`project-details${caseStudy.heroImage ? '' : ' project-details--no-hero'}`}>
           <div><dt>Category</dt><dd>{caseStudy.category}</dd></div>
           <div><dt>Role</dt><dd>{caseStudy.role}</dd></div>
           <div><dt>Deliverables</dt><dd>{caseStudy.deliverables}</dd></div>
         </dl>
 
-        <section aria-labelledby={overviewId}>
-          <h2 id={overviewId}>Overview</h2>
-          {caseStudy.overview}
-        </section>
+        {caseStudy.overview && (
+          <section aria-labelledby={overviewId}>
+            <h2 id={overviewId}>Overview</h2>
+            {caseStudy.overview}
+          </section>
+        )}
 
-        <section className="problem" aria-labelledby={problemId}>
-          <h2 id={problemId}>Problem</h2>
-          {caseStudy.problem}
-        </section>
+        {caseStudy.problem && (
+          <section className="problem" aria-labelledby={problemId}>
+            <h2 id={problemId}>Problem</h2>
+            {caseStudy.problem}
+          </section>
+        )}
 
-        <section className="design-goals" aria-labelledby={goalsId}>
-          <h2 id={goalsId}>Design goals</h2>
-          {caseStudy.designGoalsIntro}
-          <ul className="goal-grid">
-            {caseStudy.goals.map((goal) => <li key={goal}><span>{goal}</span></li>)}
-          </ul>
-        </section>
+        {caseStudy.goals?.length ? (
+          <section className="design-goals" aria-labelledby={goalsId}>
+            <h2 id={goalsId}>Design goals</h2>
+            <ul className="goal-grid">
+              {caseStudy.goals.map((goal) => <li key={goal}><span>{goal}</span></li>)}
+            </ul>
+          </section>
+        ) : null}
 
         {caseStudy.solution && (
           <section className="solution" aria-labelledby={solutionId}>
@@ -100,38 +132,90 @@ export function DesignCaseStudyPage({ caseStudy }: { caseStudy: DesignCaseStudyD
             )}
             <div className="solution-copy">{caseStudy.solution.copy}</div>
             {caseStudy.solution.comparison && (
-              <div className="solution-comparison">
+              <div className={`solution-comparison${caseStudy.solution.comparison.layout === 'walkthrough' ? ' solution-comparison--walkthrough' : ''}`}>
                 <h3>Before and after</h3>
                 <div className="solution-comparison-intro">{caseStudy.solution.comparison.intro}</div>
                 <div className="solution-comparison-rows">
-                  {caseStudy.solution.comparison.rows.map((row, index) => (
-                    <article className="solution-comparison-row" key={row.title}>
-                      <div className="solution-comparison-context">
-                        <span className="solution-comparison-index">Task {String(index + 1).padStart(2, '0')}</span>
-                        <h4>{row.title}</h4>
-                        <p>{row.description}</p>
-                      </div>
-                      <figure className="solution-comparison-image">
-                        <figcaption>Before redesign</figcaption>
-                        <img src={row.original.src} alt={row.original.alt} width="1200" height="800" loading="lazy" />
-                      </figure>
-                      <figure className="solution-comparison-image">
-                        <figcaption>After redesign</figcaption>
-                        <img src={row.redesign.src} alt={row.redesign.alt} width="1200" height="800" loading="lazy" />
-                      </figure>
+                  {caseStudy.solution.comparison.rows.map((row, index) => {
+                    const hasNotes = Boolean(row.original.bullets?.length || row.redesign.bullets?.length);
+
+                    return (
+                    <article className={`solution-comparison-row${caseStudy.solution.comparison.layout === 'walkthrough' ? ` solution-comparison-row--walkthrough${index % 2 === 1 ? ' solution-comparison-row--reverse' : ''}${hasNotes ? ' solution-comparison-row--annotated' : ''}${row.hideContext ? ' solution-comparison-row--no-context' : ''}` : ''}`} key={row.title}>
+                      {!row.hideContext && !hasNotes && (
+                        <div className="solution-comparison-context">
+                          <span className="solution-comparison-index">Task {String(index + 1).padStart(2, '0')}</span>
+                          <h4>{row.title}</h4>
+                          <p>{row.description}</p>
+                        </div>
+                      )}
+                      {caseStudy.solution.comparison.layout === 'walkthrough' ? (
+                        <div className="solution-comparison-visuals">
+                          <figure className={`solution-comparison-image${row.original.bullets?.length ? ' solution-comparison-image--annotated' : ''}`}>
+                            <figcaption>Before redesign</figcaption>
+                            <div className="solution-comparison-screen solution-comparison-screen--before">
+                              {row.original.videoSrc ? (
+                                <video aria-label={row.original.alt} autoPlay loop muted playsInline preload="metadata" poster={row.original.src}>
+                                  <source src={row.original.videoSrc} type="video/mp4" />
+                                </video>
+                              ) : (
+                                <img src={row.original.src} alt={row.original.alt} width="1200" height="800" loading="lazy" />
+                              )}
+                            </div>
+                            {row.original.bullets?.length ? (
+                              <div className="solution-comparison-notes-panel">
+                                {!caseStudy.solution.comparison.hideTaskIndex && (
+                                  <span className="solution-comparison-task-index">Task {String(index + 1).padStart(2, '0')}</span>
+                                )}
+                                <h5>{row.title}</h5>
+                                <ul className="solution-comparison-notes" aria-label="Issues in the original design">
+                                  {row.original.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                                </ul>
+                              </div>
+                            ) : null}
+                          </figure>
+                          <span className="solution-comparison-change-arrow" aria-hidden="true">↓</span>
+                          <figure className={`solution-comparison-image solution-comparison-image--after${row.redesign.bullets?.length ? ' solution-comparison-image--annotated' : ''}`}>
+                            <figcaption>After redesign</figcaption>
+                            <div className="solution-comparison-screen solution-comparison-screen--after">
+                              {row.redesign.flowVideoSrc ? (
+                                <ShingrixFlowVideo videoSrc={row.redesign.flowVideoSrc} poster={row.redesign.src} alt={row.redesign.alt} />
+                              ) : (
+                                <img src={row.redesign.src} alt={row.redesign.alt} width="1200" height="800" loading="lazy" />
+                              )}
+                            </div>
+                            {row.redesign.bullets?.length ? (
+                              <div className="solution-comparison-notes-panel">
+                                {!caseStudy.solution.comparison.hideTaskIndex && (
+                                  <span className="solution-comparison-task-index">Task {String(index + 1).padStart(2, '0')}</span>
+                                )}
+                                <h5>{row.title}</h5>
+                                <ul className="solution-comparison-notes" aria-label="Improvements in the redesign">
+                                  {row.redesign.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                                </ul>
+                              </div>
+                            ) : null}
+                          </figure>
+                        </div>
+                      ) : (
+                        <>
+                          <figure className="solution-comparison-image">
+                            <figcaption>Before redesign</figcaption>
+                            <img src={row.original.src} alt={row.original.alt} width="1200" height="800" loading="lazy" />
+                          </figure>
+                          <figure className="solution-comparison-image">
+                            <figcaption>After redesign</figcaption>
+                            <img src={row.redesign.src} alt={row.redesign.alt} width="1200" height="800" loading="lazy" />
+                          </figure>
+                        </>
+                      )}
                     </article>
-                  ))}
+                    );
+                  })}
                 </div>
                 {caseStudy.solution.comparison.supportingImages && (
                   <div className="solution-comparison-supporting">
                     <h4>Additional redesigned screens</h4>
-                    <div className="solution-gallery" aria-label="Additional redesigned screens">
-                      {caseStudy.solution.comparison.supportingImages.map((image) => (
-                        <figure key={image.src}>
-                          <img src={image.src} alt={image.alt} width="1200" height="800" loading="lazy" />
-                        </figure>
-                      ))}
-                    </div>
+                    <SolutionImageCarousel images={caseStudy.solution.comparison.supportingImages} label="Additional redesigned screens" />
                   </div>
                 )}
               </div>
@@ -145,38 +229,43 @@ export function DesignCaseStudyPage({ caseStudy }: { caseStudy: DesignCaseStudyD
                 ))}
               </div>
             )}
-            {caseStudy.solution.videoGallery && (
-              <div className="solution-video-gallery" aria-label="Motion project videos">
-                {caseStudy.solution.videoGallery.map((video, index) => (
-                  <article className="solution-video-card" key={video.src}>
-                    <div className="solution-video-frame">
-                      <video poster={video.poster} controls playsInline preload="metadata" width="1280" height="720" aria-label={`${video.title} video`}>
-                        <source src={video.src} type="video/mp4" />
-                        Your browser does not support embedded video.
-                      </video>
-                    </div>
-                    <div className="solution-video-details">
-                      <span className="solution-video-index">Project {String(index + 1).padStart(2, '0')}</span>
-                      <h3>{video.title}</h3>
-                      {video.description && <p>{video.description}</p>}
-                      {video.bullets && (
-                        <ul className="solution-video-bullets">
-                          {video.bullets.slice(0, 3).map((bullet) => <li key={bullet}>{bullet}</li>)}
-                        </ul>
-                      )}
-                      {video.tools && (
-                        <ul className="video-tool-tags" aria-label="Programs used">
-                          {video.tools.map((tool) => <li key={tool}>{tool}</li>)}
-                        </ul>
-                      )}
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
-            <ul className="solution-insights" aria-label="Key product insights">
-              {caseStudy.solution.insights.map((insight) => <li key={insight}>{insight}</li>)}
-            </ul>
+            {caseStudy.solution.insights?.length ? (
+              <>
+                {caseStudy.solution.insightsTitle && <h3 className="solution-insights-heading">{caseStudy.solution.insightsTitle}</h3>}
+                <ul className="solution-insights" aria-label={caseStudy.solution.insightsTitle ?? 'Key product insights'}>
+                  {caseStudy.solution.insights.map((insight) => <li key={insight}>{insight}</li>)}
+                </ul>
+              </>
+            ) : null}
+          </section>
+        )}
+
+        {caseStudy.videoGallery && (
+          <section className="solution solution--video-only" aria-label={caseStudy.videoGalleryLabel ?? 'Motion project videos'}>
+            <div className="solution-video-gallery">
+              {caseStudy.videoGallery.map((video, index) => (
+                <article className="solution-video-card" key={video.src}>
+                  <div className="solution-video-frame">
+                    <AutoplayMutedVideo src={video.src} title={video.title} poster={video.poster} />
+                  </div>
+                  <div className="solution-video-details">
+                    {caseStudy.videoGalleryShowIndex !== false && <span className="solution-video-index">Project {String(index + 1).padStart(2, '0')}</span>}
+                    <h3>{video.title}</h3>
+                    {video.description && <p>{video.description}</p>}
+                    {video.bullets && (
+                      <ul className="solution-video-bullets">
+                        {video.bullets.slice(0, 3).map((bullet) => <li key={bullet}>{bullet}</li>)}
+                      </ul>
+                    )}
+                    {video.tools && (
+                      <ul className="video-tool-tags" aria-label="Programs used">
+                        {video.tools.map((tool) => <li key={tool}>{tool}</li>)}
+                      </ul>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
           </section>
         )}
       </main>
@@ -185,6 +274,6 @@ export function DesignCaseStudyPage({ caseStudy }: { caseStudy: DesignCaseStudyD
         <span>{caseStudy.title} · {caseStudy.footerLabel ?? 'Product design'}</span>
         <a href="#top">Back to top ↑</a>
       </footer>
-    </>
+    </div>
   );
 }

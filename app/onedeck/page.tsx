@@ -22,14 +22,28 @@ const oneDeck: DesignCaseStudyData = {
   problem: (
     <p>People are intimidated by the time and effort it takes to learn to play board games. Current methods of learning board games include pages of rules or video tutorials that are hard to remember and understand. This deters new players from trying new board games.</p>
   ),
-  designGoalsIntro: (
-    <p>Implement researched learning strategies and needs in a flexible and curated way.<br />I researched learning and teaching strategies using observational studies and peer-reviewed research papers. I also reviewed current teaching models for board games and online game tutorials.</p>
-  ),
   goals: [
     'Ensure language and content are appropriate for users’ learning and skill needs.',
     'Create interactive experiences that are easy to revisit and digest.',
     'Set goals in each lesson or tutorial, with ways to check for success and failure.',
     'Help new players learn with confidence and less pressure.',
+  ],
+  solution: {
+    copy: <p>Players use a short quiz to choose what they want to learn. OneDeck uses those choices to create a custom tutorial tailored to their needs.</p>,
+  },
+  videoGalleryLabel: 'OneDeck quiz and custom tutorial experience demonstrations',
+  videoGalleryShowIndex: false,
+  videoGallery: [
+    {
+      src: '/videos/onedeck-video-quiz.mp4',
+      title: 'Custom skill quiz',
+      description: 'A walkthrough of the quiz flow that helps players create a custom OneDeck tutorial.',
+    },
+    {
+      src: '/videos/onedeck-tutorial.mp4',
+      title: 'Interactive tutorial',
+      description: 'A walkthrough of the tailored tutorial experience players receive after completing the quiz.',
+    },
   ],
 };
 

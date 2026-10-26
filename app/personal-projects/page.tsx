@@ -7,38 +7,11 @@ export const dynamic = 'force-static';
 const personalProjects: DesignCaseStudyData = {
   title: 'Personal projects',
   description: 'Long-form narrative motion work from school and side projects',
-  heroImage: '/personal-projects-placeholder.svg',
-  heroAlt: 'Text-based placeholder for Iris Yu’s personal motion projects collection.',
   category: 'Personal practice',
   role: 'Motion designer',
   deliverables: 'Long-form video and narrative experiments',
   footerLabel: 'Motion practice',
-  overview: (
-    <>
-      <p>This collection will bring together longer-form narrative motion projects created during school and through independent practice.</p>
-      <p>Each project will show the story, visual direction, and editing decisions behind the final piece.</p>
-    </>
-  ),
-  problem: (
-    <p>Long-form motion work needs more context than a thumbnail can provide. The case studies will make room for the project brief, narrative structure, process, and finished video.</p>
-  ),
-  designGoalsIntro: (
-    <p>As projects are added, this page will use the same clear structure for each piece so the work is easy to watch, understand, and compare.</p>
-  ),
-  goals: [
-    'Introduce the story, brief, and intended audience for each project.',
-    'Show how research and references shaped the narrative direction.',
-    'Document editing, motion, sound, and visual decisions across the process.',
-    'Pair each finished video with the insight or outcome it was built to create.',
-  ],
-  solution: {
-    copy: (
-      <>
-        <p>The collection below is ordered with the most recent work first.</p>
-        <p>Project-specific context and process notes will be added as the collection develops.</p>
-      </>
-    ),
-    videoGallery: [
+  videoGallery: [
       {
         src: '/videos/personal/05-logo-experiment.mp4',
         poster: '/video-posters/personal-05.jpg',
@@ -79,13 +52,7 @@ const personalProjects: DesignCaseStudyData = {
         bullets: ['Milestone: created my first motion-graphics video for school work.', 'Brief: produced a roughly two-minute infographic using trim paths and other common motion-graphics techniques.', 'Research: shaped researched information and statistics about Toronto’s GHG emissions into an engaging narrative.'],
         tools: ['Adobe After Effects'],
       },
-    ],
-    insights: [
-      'Videos are ordered with the most recent work first.',
-      'Project context and narrative breakdowns will be added over time.',
-      'Each piece can be expanded with process stills, references, and reflections.',
-    ],
-  },
+  ],
 };
 
 export default function PersonalProjectsCaseStudy() {

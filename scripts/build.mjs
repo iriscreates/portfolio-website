@@ -5,11 +5,11 @@ const { runPrerender } = await import('vinext/internal/build/run-prerender');
 await (await createBuilder()).buildApp();
 await runPrerender({root:process.cwd()});
 const { readFile, access, copyFile, mkdir } = await import('node:fs/promises');
-for (const route of ['about', 'onedeck', 'shingrix', 'personal-projects']) {
+for (const route of ['about', 'flux', 'onedeck', 'rishtey', 'shingrix', 'personal-projects', 'marketing']) {
  await mkdir(`dist/client/${route}`, { recursive: true });
  await copyFile(`dist/client/${route}.html`, `dist/client/${route}/index.html`);
 }
-for (const [path,text] of [['index.html','Iris Yu'],['about/index.html','About me'],['onedeck/index.html','Design goals'],['shingrix/index.html','SHINGRIX'],['personal-projects/index.html','Personal projects']]) {
+for (const [path,text] of [['index.html','Iris Yu'],['about/index.html','About me'],['flux/index.html','FLUX'],['onedeck/index.html','Design goals'],['rishtey/index.html','Rishtey'],['shingrix/index.html','SHINGRIX'],['personal-projects/index.html','Personal projects'],['marketing/index.html','Campaigns &amp; content']]) {
  const html=await readFile('dist/client/'+path,'utf8');
  if(!html.includes(text)||html.includes('Internal Server Error'))throw new Error('Static export failed: '+path);
  for(const match of html.matchAll(/(?:src|href)="(\/[^"?#]+)[^"]*"/g)){const asset=match[1];if(asset.endsWith('/'))continue;await access('dist/client'+asset);}

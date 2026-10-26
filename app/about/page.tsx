@@ -60,9 +60,8 @@ export default function AboutPage() {
           <div className="about-story-copy">
             <h1 id="about-title" className="about-hero-title-hidden">About Iris Yu</h1>
             <AboutTypewriterHeading id="about-story-title" text={'I really need to know why.\nLike,\u00a0a\u00a0lot.'} />
-            <p>I&apos;m a UX designer and content strategist who loves learning about how people think and behave. I create visual content and UI designs that are grounded in the research behind each project. I&apos;m interested in the intersection of design and marketing strategy, where strong creative ideas meet a real understanding of my target audience.</p>
-            <p>Over the past four years, I studied Digital and Experience Design at George Brown Polytechnic, where I completed my second bachelor&apos;s degree with a focus on human-centred needs.</p>
-            <p>While I was in school, I worked on client projects and learned how to use research to guide my design decisions. I also gained agency experience working with Dove, Hellmann&apos;s, Marshalls and HomeSense. My professional experience has grown around <strong>motion graphics</strong>, <strong>social content</strong>, and <strong>media design strategy</strong> for campaigns.</p>
+            <p>I&apos;m a UX designer and content strategist who investigates how people think and behave. I use research to shape clear digital experiences and visual content.</p>
+            <p>I studied Digital Experience Design at George Brown Polytechnic and gained agency experience working with Dove, Hellmann&apos;s, Marshalls, and HomeSense. My professional experience has grown around UX research, social content strategy, and motion graphics.</p>
           </div>
         </section>
 
@@ -79,11 +78,11 @@ export default function AboutPage() {
             <article className="about-experience-card">
               <p className="about-card-eyebrow">AGENCY EXPERIENCE</p>
               <h2 id="about-experience-title">Edelman Canada</h2>
-              <p>During my internship at Edelman Canada, I supported social strategy and design teams with campaign research, cultural listening, and audience insights.</p>
+              <p>At Edelman Canada, I supported social strategy and design through research and audience insights.</p>
               <ul>
-                <li>Validated campaign and activation proposals through social listening and secondary research.</li>
-                <li>Translated audience and cultural signals into clear slide-deck recommendations.</li>
-                <li>Worked across strategy, design, account, and content teams to shape ideas for Canadian audiences.</li>
+                <li>Validated campaign ideas through social listening and secondary research.</li>
+                <li>Turned audience and cultural insights into clear recommendations.</li>
+                <li>Collaborated across strategy, design, account, and content teams for Canadian audiences.</li>
               </ul>
             </article>
           </AboutReveal>

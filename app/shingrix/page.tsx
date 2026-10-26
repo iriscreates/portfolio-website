@@ -13,13 +13,10 @@ const shingrix: DesignCaseStudyData = {
   role: 'User testing designer',
   deliverables: 'User testing guidelines',
   overview: (
-    <><p>SHINGRIX is a shingles vaccine for an audience that included older adults.</p><p>GSK worked with Edelman Canada to remake the website so it would be more informative and easier to use.</p></>
+    <><p>SHINGRIX is a vaccine that helps prevent shingles in older adults. The website needed to serve them as well as family members and caregivers helping them find reliable information and next steps.</p><p>GSK partnered with Edelman Canada to redesign the experience with easier-to-digest copy and clearer visuals, helping visitors understand and recall key facts, explore supporting details, and find a nearby vaccination location.</p></>
   ),
   problem: (
     <p>The initial website contained excessive information formatted in a way that was confusing, overwhelming, and hard to use. Users were bombarded with text and did not know how to make an appointment to get the vaccine.</p>
-  ),
-  designGoalsIntro: (
-    <p>During my internship, I created the user-testing guidelines and questionnaire for a new design that was already in the high-fidelity stage. I focused on whether the experience worked for the older audience and challenged the design team to consider real user needs beyond a generic landing page.</p>
   ),
   goals: [
     'Review the new design concepts and clarify what each experience should help users do.',
@@ -35,31 +32,63 @@ const shingrix: DesignCaseStudyData = {
       </>
     ),
     comparison: {
+      layout: 'walkthrough',
+      hideTaskIndex: true,
       intro: <p>Each comparison follows a user task from the testing process: find the information, understand it, and know what to do next.</p>,
       rows: [
         {
-          title: 'Understand shingles and its symptoms',
-          description: 'The original facts page relied on a long, text-heavy scroll. The redesign turns key facts and misconceptions into shorter, more visual moments.',
-          original: { src: '/shingrix/shingles-1.jpg', alt: 'Original SHINGRIX facts page with long-form shingles information.' },
-          redesign: { src: '/shingrix/shingrix-3.jpg', alt: 'Redesigned SHINGRIX educational screen explaining common shingles misconceptions.' },
+          title: 'Understand shingles symptoms',
+          description: 'Compare how each version helps people find and understand key information.',
+          original: {
+            src: '/shingrix/shingles-1.jpg',
+            videoSrc: '/shingrix/shringrixvideo1.mp4',
+            alt: 'Animated recording of the original SHINGRIX facts page with long-form shingles information.',
+            bullets: [
+              'Long scrolling hid key details.',
+              'Dense copy buried the main facts.',
+              'Few visuals broke up the text.',
+              'Next steps were easy to miss.',
+            ],
+          },
+          redesign: {
+            src: '/shingrix/shingrix-flow-1.png',
+            alt: 'Redesigned SHINGRIX educational screen explaining common shingles misconceptions.',
+            flowVideoSrc: '/shingrix/shingrix-redesign-flow.mp4',
+            bullets: [
+              'Short facts surface key information.',
+              'Expandable details add depth on demand.',
+              'Visuals clarify the content.',
+              'Clear indicators guide next steps.',
+            ],
+          },
         },
         {
-          title: 'Find vaccine information and next steps',
+          title: 'Find vaccine info and next steps',
           description: 'The original FAQ grid made users scan many questions to find a path forward. The redesign brings navigation, vaccine information, and Get SHINGRIX actions into the main experience.',
-          original: { src: '/shingrix/shingles-2.jpg', alt: 'Original SHINGRIX FAQ page with a grid of questions.' },
-          redesign: { src: '/shingrix/shingrix-2.jpg', alt: 'Redesigned SHINGRIX landing page with campaign navigation and a 1 in 3 shingles message.' },
+          hideContext: true,
+          original: {
+            src: '/shingrix/shingles-2.jpg',
+            videoSrc: '/shingrix/faq-shingrix-before.mp4',
+            alt: 'Recording of the original SHINGRIX FAQ page with a grid of questions.',
+            bullets: [
+              'A question grid made FAQs hard to scan.',
+              'Answers sat apart from the main experience.',
+              'Vaccine actions were easy to miss.',
+            ],
+          },
+          redesign: {
+            src: '/shingrix/shingrix-2.jpg',
+            flowVideoSrc: '/shingrix/faq-shringrix-after.mp4',
+            alt: 'Recording of the redesigned SHINGRIX FAQ and next-step flow.',
+            bullets: [
+              'Grouped FAQs make answers easier to scan and understand at a glance.',
+              'Expandable answers keep details easy to scan.',
+              'Get SHINGRIX actions highlight next steps.',
+            ],
+          },
         },
       ],
-      supportingImages: [
-        { src: '/shingrix/shingrix-4.jpg', alt: 'Redesigned SHINGRIX educational screen with three shingles information cards.' },
-        { src: '/shingrix/shingrix-5.jpg', alt: 'Redesigned SHINGRIX landing page variant featuring a skier and a 1 in 3 shingles message.' },
-      ],
     },
-    insights: [
-      'Larger cards with less text made information easier to recall.',
-      'Larger static buttons and multiple vaccine entry points improved findability.',
-      'The testing guidelines sped up the feedback process for a team new to user testing.',
-    ],
   },
 };
 
