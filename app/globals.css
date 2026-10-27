@@ -667,6 +667,7 @@ html:has(.landing)::view-transition-new(root) {
 .flux-process-gallery figure { min-width: 0; overflow: hidden; margin: 0; border: 1px solid #453a50; background: #24202a; }
 .flux-process-gallery img { display: block; width: 100%; height: auto; }
 .flux-process-image-trigger { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border: 0; padding: 0; background: #fff; cursor: zoom-in; font: inherit; text-align: left; }
+.flux-process-image-static { cursor: default; }
 .flux-process-image-trigger img { width: 100%; height: 100%; object-fit: contain; }
 .flux-process-image-trigger:focus-visible { outline: 3px solid #d2b5fa; outline-offset: -3px; }
 .flux-process-gallery-crop-bottom .flux-process-image-trigger img { object-fit: cover; object-position: top; }

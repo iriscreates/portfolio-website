@@ -6,8 +6,22 @@ type ProcessImage = { src: string; alt: string; title: string; width: number; he
 
 export function FluxProcessGallery({ images }: { images: ProcessImage[] }) {
   const [activeImage, setActiveImage] = useState<ProcessImage | null>(null);
+  const [canEnlarge, setCanEnlarge] = useState(false);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia('(min-width: 701px)');
+    const updateViewport = () => setCanEnlarge(desktopQuery.matches);
+    updateViewport();
+    if (desktopQuery.addEventListener) desktopQuery.addEventListener('change', updateViewport);
+    else desktopQuery.addListener(updateViewport);
+
+    return () => {
+      if (desktopQuery.removeEventListener) desktopQuery.removeEventListener('change', updateViewport);
+      else desktopQuery.removeListener(updateViewport);
+    };
+  }, []);
 
   useEffect(() => {
     if (!activeImage) return;
@@ -33,19 +47,28 @@ export function FluxProcessGallery({ images }: { images: ProcessImage[] }) {
       <div className="flux-process-gallery">
         {images.map((image, index) => (
           <figure className={index === 2 ? 'flux-process-gallery-wide' : index === 1 ? 'flux-process-gallery-crop-bottom' : undefined} key={image.src}>
-            <button
-              className="flux-process-image-trigger"
-              type="button"
-              style={{ aspectRatio: index === 1 ? `${images[0].width} / ${images[0].height}` : `${image.width} / ${image.height}` }}
-              onClick={(event) => {
-                triggerRef.current = event.currentTarget;
-                setActiveImage(image);
-              }}
-              aria-label={`Enlarge ${image.title}`}
-            >
-              <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" />
-              <span aria-hidden="true">Enlarge</span>
-            </button>
+            {canEnlarge ? (
+              <button
+                className="flux-process-image-trigger"
+                type="button"
+                style={{ aspectRatio: index === 1 ? `${images[0].width} / ${images[0].height}` : `${image.width} / ${image.height}` }}
+                onClick={(event) => {
+                  triggerRef.current = event.currentTarget;
+                  setActiveImage(image);
+                }}
+                aria-label={`Enlarge ${image.title}`}
+              >
+                <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" />
+                <span aria-hidden="true">Enlarge</span>
+              </button>
+            ) : (
+              <div
+                className="flux-process-image-trigger flux-process-image-static"
+                style={{ aspectRatio: index === 1 ? `${images[0].width} / ${images[0].height}` : `${image.width} / ${image.height}` }}
+              >
+                <img src={image.src} alt={image.alt} width={image.width} height={image.height} loading="lazy" />
+              </div>
+            )}
           </figure>
         ))}
       </div>
